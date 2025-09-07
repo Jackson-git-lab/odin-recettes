@@ -1,47 +1,235 @@
-*{
-    background-color: aqua;
-    font-size: medium;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* ===== RESET ET STYLES DE BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body{
-    display: block;
-    background-color: rgb(214, 213, 213);
-    text-align: center;
-    margin: 20px;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
     padding: 20px;
-    font-style: italic;
-    font-weight: bold;
-    border: 2px  solid black;
 }
-h1{
-    background-color: red;
+
+/* ===== CONTENEUR PRINCIPAL (FLEX CONTAINER) ===== */
+body {
+    /* PROPRIÉTÉS FLEXBOX DU CONTENEUR */
+    display: flex; /* ✅ Active Flexbox sur tout le body */
+    flex-direction: column; /* ✅ Direction verticale */
+    min-height: 100vh; /* ✅ Prend toute la hauteur de la fenêtre */
+    justify-content: flex-start; /* ✅ Aligne le contenu en haut */
+    align-items: center; /* ✅ Centre horizontalement */
+}
+
+/* ===== EN-TÊTE ===== */
+h1 {
+    margin: 20px 0;
+    color: #2c3e50;
     text-align: center;
-    font-size: 30px;
-
+    font-size: 2.5rem;
 }
-a{
-  text-align: center;
-  text-decoration: none;
-  border-radius: 5px;
-  background-color: azure;
-  font-size: 20px;
-  
+
+/* ===== CONTENEUR DE RECETTES (FLEX CONTAINER) ===== */
+ul {
+    /* PROPRIÉTÉS FLEXBOX */
+    display: flex; /* ✅ Active Flexbox */
+    flex-wrap: wrap; /* ✅ Permet le retour à la ligne */
+    justify-content: center; /* ✅ Centre les éléments horizontalement */
+    align-items: stretch; /* ✅ Étire les éléments sur la hauteur */
+    gap: 20px; /* ✅ Espacement entre les éléments */
     
+    /* Styles visuels */
+    list-style-type: none;
+    max-width: 1200px;
+    margin: 30px 0;
+    padding: 0;
 }
 
-li{
-   border-bottom: 2px solid black;
-
+/* ===== ÉLÉMENTS DE LISTE (FLEX ITEMS) ===== */
+li {
+    /* PROPRIÉTÉS FLEXBOX DES ENFANTS */
+    flex: 1 1 300px; /* ✅ flex-grow:1, flex-shrink:1, flex-basis:300px */
+    
+    /* Styles visuels */
+    background: white;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-h3,
-h5{
-    background-color: red;
+
+li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== LIENS ===== */
+a {
+    /* PROPRIÉTÉS FLEXBOX POUR LES LIENS DANS LES CARDS */
+    display: flex; /* ✅ Active Flexbox à l'intérieur du lien */
+    flex-direction: column; /* ✅ Direction verticale */
+    justify-content: space-between; /* ✅ Répartit l'espace verticalement */
+    align-items: center; /* ✅ Centre horizontalement */
+    
+    /* Styles visuels */
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    height: 100%;
+}
+
+a[href="../index.html"] {
+    /* Style spécifique pour le lien d'accueil */
+    display: inline-flex; /* ✅ Flexbox pour le lien seul */
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
     border-radius: 5px;
+    font-weight: bold;
+    align-self: flex-start; /* ✅ S'aligne au début du conteneur flex */
 }
-img{
-    display:inline-block;
-    margin: 10px;
-    padding: 10px;
-    height: 300px;
-    width: 500px;
+
+a[href="../index.html"]:hover {
+    background: #2980b9;
 }
+
+/* ===== PAGES DE RECETTES ===== */
+body > img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h3, h5 {
+    margin: 25px 0 15px;
+    color: #2c3e50;
+    align-self: flex-start; /* ✅ S'aligne au début sur l'axe horizontal */
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* ===== LISTES D'INGRÉDIENTS ET D'ÉTAPES ===== */
+ul:not(:first-of-type), ol {
+    /* CONTENEUR FLEX pour les listes de recettes */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+    max-width: 800px;
+    align-self: center; /* ✅ Centre le conteneur */
+}
+
+ul:not(:first-of-type) li, ol li {
+    /* ÉLÉMENTS des listes de recettes */
+    flex: 0 0 auto; /* ✅ Ne s'étend pas, ne rétrécit pas, taille automatique */
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+        align-items: stretch; /* ✅ Étire sur toute la largeur en mobile */
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    ul {
+        flex-direction: column; /* ✅ Passe en colonne sur mobile */
+    }
+    
+    li {
+        flex: 1 1 auto; /* ✅ Taille automatique sur mobile */
+    }
+}
+
+/* ===== EFFETS VISUELS SUPPLÉMENTAIRES ===== */
+img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Style pour les titres des recettes dans les cartes */
+a::before {
+    content: attr(href);
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #3498db;
+    text-align: center;
+}
+
+/* Personnalisation spécifique pour chaque recette */
+li:nth-child(1) {
+    border-top: 5px solid #e74c3c;
+}
+
+li:nth-child(2) {
+    border-top: 5px solid #2ecc71;
+}
+
+li:nth-child(3) {
+    border-top: 5px solid #f39c12;
+}
+li:nth-child(4) {
+    border-top: 5px solid #e74c3c;
+}
+
+li:nth-child(5) {
+    border-top: 5px solid #2ecc71;
+}
+
+li:nth-child(6) {
+    border-top: 5px solid #f39c12;
+}
+li:nth-child(7) {
+    border-top: 5px solid #e74c3c;
+}
+
+li:nth-child(8) {
+    border-top: 5px solid #2ecc71;
+}
+
+li:nth-child(9) {
+    border-top: 5px solid #f39c12;
+}
+li:nth-child(10) {
+    border-top: 5px solid #e74c3c;
+}
+li:nth-child(11) {
+    border-top: 5px solid #2ecc71;
+}
+
+li:nth-child(12) {
+    border-top: 5px solid #f39c12;
+}
+li:nth-child(13) {
+    border-top: 5px solid #e74c3c;
+}
+li:nth-child(14) {
+    border-top: 5px solid #2ecc71;
+}
+
+li:nth-child(15) {
+    border-top: 5px solid #f39c12;
+}
+li:nth-child(16) {
+    border-top: 5px solid #e74c3c;
+}
+
